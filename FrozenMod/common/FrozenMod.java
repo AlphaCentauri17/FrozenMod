@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
@@ -16,9 +17,18 @@ import alphacentauri17.FrozenMod.common.FrozenModCommonProxy;
 import alphacentauri17.FrozenMod.common.handlers.FrozenModClientPacketHandler;
 import alphacentauri17.FrozenMod.common.handlers.FrozenModServerPacketHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
+import net.minecraft.world.biome.BiomeGenBase;
 import alphacentauri17.FrozenMod.common.items.ItemDisk;
+import alphacentauri17.FrozenMod.common.mobs.EntityKristoff;
+import alphacentauri17.FrozenMod.common.mobs.RenderKristoff;
+
 
 @NetworkMod(clientSideRequired=true,serverSideRequired=true, //Whether client side and server side are needed
 clientPacketHandlerSpec = @SidedPacketHandler(channels = {"FrozenMod"}, packetHandler = FrozenModClientPacketHandler.class), //For clientside packet handling
@@ -43,6 +53,15 @@ public void PreInit(FMLPreInitializationEvent e){
 
 //ITEMS
 Disk = new ItemDisk(5700) .setUnlocalizedName("Let It Go").setCreativeTab(CreativeTabs.tabMisc);
+
+//MOBS
+proxy.registerRenderInformation();
+
+//NPCs
+//Kristoff
+registerEntity(EntityKristoff.class, "Kristoff", 0xeaeae9, 0xc99a03);
+LanguageRegistry.instance().addStringLocalization("entity.Kristoff.name", "Kristoff");
+
 }
 
 @Init
@@ -54,5 +73,18 @@ proxy.registerItems();
 //MULTIPLAYER ABILITY
 NetworkRegistry.instance().registerGuiHandler(this, proxy); //Registers the class that deals with GUI data
 
+}
+
+public void registerEntity(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
+int id = EntityRegistry.findGlobalUniqueEntityId();
+
+EntityRegistry.registerGlobalEntityID(entityClass, entityName, id);
+EntityList.entityEggs.put(Integer.valueOf(id), new EntityEggInfo(id, bkEggColor, fgEggColor));
+}
+
+public void addSpawn(Class<? extends EntityLiving> entityClass, int spawnProb, int min, int max, BiomeGenBase[] biomes) {
+if (spawnProb > 0) {
+EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.creature, biomes);
+}
 }
 }
