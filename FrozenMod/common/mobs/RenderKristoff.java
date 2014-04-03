@@ -35,7 +35,7 @@ protected ModelBiped field_82423_g;
 protected ModelBiped field_82425_h;
 private static final Map field_110859_k = Maps.newHashMap();
 
-private static final ResourceLocation skin = new ResourceLocation("FrozenMod", "textures/entities/Kristoff.png");
+private static final ResourceLocation skin = new ResourceLocation("FrozenMod:"+ "textures/entities/Kristoff.png");
 
 /** List of armor texture filenames. */
 public static String[] bipedArmorFilenamePrefix = new String[] {"leather", "chainmail", "iron", "diamond", "gold"};
@@ -118,7 +118,7 @@ Item item = itemstack.getItem();
 if (item instanceof ItemArmor)
 {
 ItemArmor itemarmor = (ItemArmor)item;
-this.func_110776_a(getArmorResource(par1EntityLiving, itemstack, par2, null));
+this.func_110775_a(getArmorResource(par1EntityLiving, itemstack, par2, null));
 ModelBiped modelbiped = par2 == 2 ? this.field_82425_h : this.field_82423_g;
 modelbiped.bipedHead.showModel = par2 == 0;
 modelbiped.bipedHeadwear.showModel = par2 == 0;
@@ -175,7 +175,7 @@ Item item = itemstack.getItem();
 
 if (item instanceof ItemArmor)
 {
-this.func_110776_a(getArmorResource(par1EntityLiving, itemstack, par2, "overlay"));
+this.func_110775_a(getArmorResource(par1EntityLiving, itemstack, par2, "overlay"));
 float f1 = 1.0F;
 GL11.glColor3f(f1, f1, f1);
 }
@@ -361,7 +361,7 @@ public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, dou
 this.doRenderLiving((EntityKristoff)par1EntityLivingBase, par2, par4, par6, par8, par9);
 }
 
-protected ResourceLocation func_110775_a(Entity par1Entity)
+protected ResourceLocation func_110775_a(ResourceLocation resourceLocation)
 {
 return skin;
 }
@@ -375,5 +375,11 @@ return skin;
 public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 {
 this.doRenderLiving((EntityKristoff)par1Entity, par2, par4, par6, par8, par9);
+}
+
+@Override
+protected ResourceLocation getEntityTexture(Entity entity) {
+	// TODO Auto-generated method stub
+	return skin;
 }
 }

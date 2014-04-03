@@ -5,6 +5,7 @@ import java.util.Random;
 import alphacentauri17.FrozenMod.common.FrozenMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -36,10 +37,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 
-public class EntityKristoff extends EntityAnimal
+public class EntityElsa extends EntityAnimal
 {
 
-public EntityKristoff(World par1world)
+public EntityElsa(World par1world)
 {
 super(par1world);
 
@@ -49,8 +50,7 @@ this.getNavigator().setAvoidsWater(true);
 
 
 this.tasks.addTask(0, new EntityAISwimming(this));
-this.tasks.addTask(1, new EntityAIWander(this, 0.5D));
-this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+this.tasks.addTask(1, new EntityAIWander(this, .5D));
 this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 }
 @Override
@@ -64,9 +64,33 @@ protected void applyEntityAttributes()
   // Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
   this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
   // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-  this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.699D);
+  this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
   // Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 }
+public void onLivingUpdate()
+{
+
+super.onLivingUpdate();
+int i = MathHelper.floor_double(this.posX);
+int j = MathHelper.floor_double(this.posZ);
+j = MathHelper.floor_double(this.posX + (double)((float)(i % 2 * 2 - 1) * 0.25F));
+int k = MathHelper.floor_double(this.posY);
+int m = MathHelper.floor_double(this.posY - 2F);
+int n = MathHelper.floor_double(this.posY - 2F);
+int l = MathHelper.floor_double(this.posZ + (double)((float)(i / 2 % 2 * 2 - 1) * 0.25F));
+
+        if (this.worldObj.getBlockId(j, k, l) == 0 && Block.snow.canPlaceBlockAt(this.worldObj, j, k, l))
+        {
+            this.worldObj.setBlock(j, k, l, Block.snow.blockID);}
+        
+         if (this.worldObj.getBlockMaterial(i, j, m) == Material.water && worldObj.getBlockMetadata(i, j, m) == 0)
+        {
+            worldObj.setBlockToAir(i, j, m);}
+         
+         if (this.worldObj.getBlockId(j, m, l) == 0 && this.worldObj.getBiomeGenForCoords(j, l).getFloatTemperature() < .4F && Block.ice.canPlaceBlockOnSide(this.worldObj, j, m, n, l))
+        {
+            this.worldObj.setBlock(j, m, l, Block.ice.blockID);}
+        }
 public EnumCreatureAttribute getCreatureAttribute()
 {
 return EnumCreatureAttribute.UNDEAD;
