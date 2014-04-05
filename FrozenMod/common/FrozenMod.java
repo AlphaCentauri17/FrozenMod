@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.world.biome.BiomeGenBase;
 import alphacentauri17.FrozenMod.common.items.ItemDisk;
+import alphacentauri17.FrozenMod.common.mobs.EntityAnna;
 import alphacentauri17.FrozenMod.common.mobs.EntityElsa;
 import alphacentauri17.FrozenMod.common.mobs.EntityKristoff;
 import alphacentauri17.FrozenMod.common.mobs.RenderKristoff;
@@ -65,6 +66,9 @@ LanguageRegistry.instance().addStringLocalization("entity.Kristoff.name", "Krist
 //Elsa
 registerEntity(EntityElsa.class, "Elsa", 0xeaeae9, 40);
 LanguageRegistry.instance().addStringLocalization("entity.Elsa.name", "Queen Elsa");
+//Anna
+registerEntity(EntityAnna.class, "Anna", 0x3399FF, 0x3399FF);
+LanguageRegistry.instance().addStringLocalization("entity.Anna.name", "Princess Anna");
 
 }
 

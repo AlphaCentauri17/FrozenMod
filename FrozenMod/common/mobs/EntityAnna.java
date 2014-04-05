@@ -5,8 +5,6 @@ import java.util.Random;
 import alphacentauri17.FrozenMod.common.FrozenMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -38,10 +36,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 
-public class EntityElsa extends EntityAnimal
+public class EntityAnna extends EntityAnimal
 {
 
-public EntityElsa(World par1world)
+public EntityAnna(World par1world)
 {
 super(par1world);
 
@@ -51,7 +49,8 @@ this.getNavigator().setAvoidsWater(true);
 
 
 this.tasks.addTask(0, new EntityAISwimming(this));
-this.tasks.addTask(1, new EntityAIWander(this, .5D));
+this.tasks.addTask(1, new EntityAIWander(this, 0.5D));
+this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 }
 @Override
@@ -65,34 +64,9 @@ protected void applyEntityAttributes()
   // Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
   this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
   // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-  this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+  this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.699D);
   // Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 }
-public void onLivingUpdate()
-{
-
-super.onLivingUpdate();
-int i = MathHelper.floor_double(this.posX);
-int j = MathHelper.floor_double(this.posZ);
-j = MathHelper.floor_double(this.posX + (double)((float)(i % 2 * 2 - 1) * 0.25F));
-int k = MathHelper.floor_double(this.posY);
-int m = MathHelper.floor_double(this.posY - 2F);
-int n = MathHelper.floor_double(this.posY - 2F);
-int l = MathHelper.floor_double(this.posZ + (double)((float)(i / 2 % 2 * 2 - 1) * 0.25F));
-int f = MathHelper.floor_double(this.posY - 1F);
-
-        if (this.worldObj.getBlockId(j, k, l) == 0 && Block.snow.canPlaceBlockAt(this.worldObj, j, k, l))
-        {
-            this.worldObj.setBlock(j, k, l, Block.snow.blockID);}
-        
-         if (this.worldObj.getBlockId(j, n, l) == 0 && this.worldObj.getBiomeGenForCoords(j, l).getFloatTemperature() < .4F && Block.ice.canPlaceBlockOnSide(this.worldObj, j, m, n, l))
-        {
-            this.worldObj.setBlock(j, n, l, Block.ice.blockID);}
-         
-         else if (this.worldObj.getBlockId(j, f, l) == 9)
-         {
-         	this.worldObj.setBlock(j, f, l, Block.ice.blockID);}
-        }
 public EnumCreatureAttribute getCreatureAttribute()
 {
 return EnumCreatureAttribute.UNDEAD;
