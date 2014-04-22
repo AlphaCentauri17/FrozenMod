@@ -47,8 +47,7 @@ super(par1world);
 
 this.setSize(1.0F, 1.75F);
 
-this.getNavigator().setAvoidsWater(true);
-
+this.getNavigator().setAvoidsWater(false);
 
 this.tasks.addTask(0, new EntityAISwimming(this));
 this.tasks.addTask(1, new EntityAIWander(this, .5D));

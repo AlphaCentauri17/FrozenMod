@@ -16,16 +16,22 @@ import cpw.mods.fml.common.SidedProxy;
 import alphacentauri17.FrozenMod.common.FrozenModCommonProxy;
 import alphacentauri17.FrozenMod.common.handlers.FrozenModClientPacketHandler;
 import alphacentauri17.FrozenMod.common.handlers.FrozenModServerPacketHandler;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.world.biome.BiomeGenBase;
 import alphacentauri17.FrozenMod.common.items.ItemDisk;
+import alphacentauri17.FrozenMod.common.items.ItemElsaPower;
+import alphacentauri17.FrozenMod.common.items.ItemKristoffPickaxe;
+import alphacentauri17.FrozenMod.common.items.ItemOpenDoorDisk;
+import alphacentauri17.FrozenMod.common.items.ItemSnowmanDisk;
 import alphacentauri17.FrozenMod.common.mobs.EntityAnna;
 import alphacentauri17.FrozenMod.common.mobs.EntityElsa;
 import alphacentauri17.FrozenMod.common.mobs.EntityKristoff;
@@ -49,13 +55,20 @@ public static FrozenModCommonProxy proxy;
 
 //ITEMS
 public static Item Disk;
+public static Item SnowmanDisk;
+public static Item OpenDoorDisk;
+public static Item KristoffPickaxe;
+public static Item ElsaPower;
 
 @PreInit
 public void PreInit(FMLPreInitializationEvent e){
 
 //ITEMS
 Disk = new ItemDisk(5700) .setUnlocalizedName("Let It Go").setCreativeTab(CreativeTabs.tabMisc);
-
+SnowmanDisk = new ItemSnowmanDisk(5701) .setUnlocalizedName("Do You Want To Build A Snowman").setCreativeTab(CreativeTabs.tabMisc);
+OpenDoorDisk = new ItemOpenDoorDisk(5702) .setUnlocalizedName("Love Is An Open Door").setCreativeTab(CreativeTabs.tabMisc);
+KristoffPickaxe = new ItemKristoffPickaxe(5703, EnumToolMaterial.IRON) .setUnlocalizedName("Kristoff's Pickaxe").setCreativeTab(CreativeTabs.tabTools);
+ElsaPower = new ItemElsaPower(5304) .setUnlocalizedName("Elsa's Power") .setCreativeTab(CreativeTabs.tabBrewing);
 //MOBS
 proxy.registerRenderInformation();
 
