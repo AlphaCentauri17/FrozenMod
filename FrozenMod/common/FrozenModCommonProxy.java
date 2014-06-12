@@ -43,5 +43,8 @@ LanguageRegistry.addName(FrozenMod.KristoffPickaxe, "Kristoff's Pickaxe");
 GameRegistry.addRecipe(new ItemStack(FrozenMod.KristoffPickaxe), "MNM"," N "," N ", Character.valueOf('M'), Item.ingotIron, Character.valueOf('N'), Item.stick);
 //ElsaPower
 LanguageRegistry.addName(FrozenMod.ElsaPower, "Elsa's Power");
+//WandOfWinter
+LanguageRegistry.addName(FrozenMod.WandOfWinter, "Wand of Winter's Power");
+GameRegistry.addRecipe(new ItemStack(FrozenMod.WandOfWinter), " Y "," X "," Z ", Character.valueOf('Y'), FrozenMod.ElsaPower, Character.valueOf('X'), Item.diamond, Character.valueOf('Z'), Item.stick);
 }
 }

@@ -69,7 +69,7 @@ protected void applyEntityAttributes()
 }
 public EnumCreatureAttribute getCreatureAttribute()
 {
-return EnumCreatureAttribute.UNDEAD;
+return EnumCreatureAttribute.UNDEFINED;
 }
 
 protected boolean isAIEnabled()
@@ -79,7 +79,7 @@ return true;
 
 protected boolean canDespawn()
 {
-return true;
+return false;
 }
 
 @Override

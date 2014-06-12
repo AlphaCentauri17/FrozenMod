@@ -69,7 +69,7 @@ protected void applyEntityAttributes()
 }
 public EnumCreatureAttribute getCreatureAttribute()
 {
-return EnumCreatureAttribute.UNDEAD;
+return EnumCreatureAttribute.UNDEFINED;
 }
 
 protected boolean isAIEnabled()
@@ -79,9 +79,12 @@ return true;
 
 protected boolean canDespawn()
 {
-return true;
+return false;
 }
-
+protected int getDropItemId()
+{
+    return FrozenMod.KristoffPickaxe.itemID;
+}
 @Override
 public EntityAgeable createChild(EntityAgeable entityageable) {
 // TODO Auto-generated method stub

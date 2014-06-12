@@ -1,31 +1,67 @@
 package alphacentauri17.FrozenMod.common.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import alphacentauri17.FrozenMod.common.FrozenMod;
-import net.minecraft.block.Block;
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
-import net.minecraft.item.ItemRecord;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraft.client.renderer.texture.IconRegister;
 
-public class ItemElsaPower extends Item
+public class ItemElsaPower extends ItemFood
 {
-public ItemElsaPower(int id)
-{
-super(id);
-}
-
-@Override
-@SideOnly(Side.CLIENT)
-public void registerIcons(IconRegister iconRegister)
-{
-itemIcon = iconRegister.registerIcon("FrozenMod:" + "Elsa Power");
-}
+	private int[] potionEffect = {9, 18, 13};
+	private int[] potionDuration = {60, 30, 60};
+	private int[] potionTier = {3, 2, 2};
+	
+    public ItemElsaPower(int itemID)
+	{
+    	super(itemID, 0, 0F, false);
+	    this.maxStackSize = 64;
+	    this.setAlwaysEdible();	        
+	}
+    
+    @Override 
+    public void registerIcons(IconRegister iconRegister)
+    {
+    	itemIcon = iconRegister.registerIcon("FrozenMod:" + "ElsaPower");
+    }
+    public void onFoodEaten(ItemStack itemstack, World world, EntityPlayer player)
+    {	
+        --itemstack.stackSize;
+        player.getFoodStats().addStats(this);
+        world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        this.addPotionEffects(itemstack, world, player);   		        
+    }
+    
+    protected void addPotionEffects(ItemStack item, World world, EntityPlayer player)
+    {
+        player.addPotionEffect(new PotionEffect(potionEffect[0], potionDuration[0] * 20, potionTier[0]));       
+        player.addPotionEffect(new PotionEffect(potionEffect[1], potionDuration[1] * 20, potionTier[1])); 
+        player.addPotionEffect(new PotionEffect(potionEffect[2], potionDuration[2] * 20, potionTier[2])); 
+    }
+    
+    public EnumAction getItemUseAction(ItemStack itemstack)
+    {
+        return EnumAction.drink;       
+    }
+    
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
+    {     	
+    	player.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));	       	
+        return itemstack; 
+    }
+    
+    public boolean hasEffect(ItemStack itemstack)
+    {	
+        return true;        
+    }
+    
+    public void addInformation(ItemStack item, EntityPlayer player, List list, boolean par4)
+    {
+    	list.add("I would not drink this...");    	
+    }	
 }

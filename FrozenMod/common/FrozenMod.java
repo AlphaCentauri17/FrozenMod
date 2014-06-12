@@ -32,6 +32,7 @@ import alphacentauri17.FrozenMod.common.items.ItemElsaPower;
 import alphacentauri17.FrozenMod.common.items.ItemKristoffPickaxe;
 import alphacentauri17.FrozenMod.common.items.ItemOpenDoorDisk;
 import alphacentauri17.FrozenMod.common.items.ItemSnowmanDisk;
+import alphacentauri17.FrozenMod.common.items.ItemWandOfWinter;
 import alphacentauri17.FrozenMod.common.mobs.EntityAnna;
 import alphacentauri17.FrozenMod.common.mobs.EntityElsa;
 import alphacentauri17.FrozenMod.common.mobs.EntityKristoff;
@@ -43,7 +44,7 @@ clientPacketHandlerSpec = @SidedPacketHandler(channels = {"FrozenMod"}, packetHa
 serverPacketHandlerSpec = @SidedPacketHandler(channels = {"FrozenMod"}, packetHandler = FrozenModServerPacketHandler.class)) //For serverside packet handling
 
 //MOD BASICS
-@Mod(modid="FrozenMod",name="Frozen Mod",version="Release")
+@Mod(modid="FrozenMod",name="Frozen Mod",version="0.0.2")
 
 public class FrozenMod {
 
@@ -59,6 +60,7 @@ public static Item SnowmanDisk;
 public static Item OpenDoorDisk;
 public static Item KristoffPickaxe;
 public static Item ElsaPower;
+public static Item WandOfWinter;
 
 @PreInit
 public void PreInit(FMLPreInitializationEvent e){
@@ -68,7 +70,8 @@ Disk = new ItemDisk(5700) .setUnlocalizedName("Let It Go").setCreativeTab(Creati
 SnowmanDisk = new ItemSnowmanDisk(5701) .setUnlocalizedName("Do You Want To Build A Snowman").setCreativeTab(CreativeTabs.tabMisc);
 OpenDoorDisk = new ItemOpenDoorDisk(5702) .setUnlocalizedName("Love Is An Open Door").setCreativeTab(CreativeTabs.tabMisc);
 KristoffPickaxe = new ItemKristoffPickaxe(5703, EnumToolMaterial.IRON) .setUnlocalizedName("Kristoff's Pickaxe").setCreativeTab(CreativeTabs.tabTools);
-ElsaPower = new ItemElsaPower(5304) .setUnlocalizedName("Elsa's Power") .setCreativeTab(CreativeTabs.tabBrewing);
+ElsaPower = new ItemElsaPower(5704) .setUnlocalizedName("Elsa's Power") .setCreativeTab(CreativeTabs.tabBrewing);
+WandOfWinter = new ItemWandOfWinter(5705) .setUnlocalizedName("Wand of Winter's Power") .setCreativeTab(CreativeTabs.tabTools);
 //MOBS
 proxy.registerRenderInformation();
 
@@ -77,10 +80,10 @@ proxy.registerRenderInformation();
 registerEntity(EntityKristoff.class, "Kristoff", 0xeaeae9, 0xc99a03);
 LanguageRegistry.instance().addStringLocalization("entity.Kristoff.name", "Kristoff");
 //Elsa
-registerEntity(EntityElsa.class, "Elsa", 0xeaeae9, 40);
+registerEntity(EntityElsa.class, "Elsa", 0x00CCFF, 0x000066);
 LanguageRegistry.instance().addStringLocalization("entity.Elsa.name", "Queen Elsa");
 //Anna
-registerEntity(EntityAnna.class, "Anna", 0x3399FF, 0x3399FF);
+registerEntity(EntityAnna.class, "Anna", 0xFFFFFF, 0x00CCFF);
 LanguageRegistry.instance().addStringLocalization("entity.Anna.name", "Princess Anna");
 
 }

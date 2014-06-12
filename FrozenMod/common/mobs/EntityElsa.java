@@ -94,7 +94,7 @@ int f = MathHelper.floor_double(this.posY - 1F);
         }
 public EnumCreatureAttribute getCreatureAttribute()
 {
-return EnumCreatureAttribute.UNDEAD;
+return EnumCreatureAttribute.UNDEFINED;
 }
 
 protected boolean isAIEnabled()
@@ -104,9 +104,12 @@ return true;
 
 protected boolean canDespawn()
 {
-return true;
+return false;
 }
-
+protected int getDropItemId()
+{
+    return FrozenMod.ElsaPower.itemID;
+}
 @Override
 public EntityAgeable createChild(EntityAgeable entityageable) {
 // TODO Auto-generated method stub
